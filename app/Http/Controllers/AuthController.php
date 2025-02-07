@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\AuthRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
@@ -13,6 +14,7 @@ class AuthController extends Controller
         return view('login');
     }
 
+    // ログイン機能
     public function login(AuthRequest $request)
     {
         $credentials = $request->validated();
@@ -31,6 +33,18 @@ class AuthController extends Controller
         return back()->withErrors([
             'email' => 'メールアドレスまたはパスワードが正しくありません',
         ])->onlyInput('email');
+    }
+
+    // ログアウト機能
+    public function logout(Request $request)
+    {
+        // ログアウト処理
+        Auth::logout();
+        // セッションを無効化
+        $request->session()->invalidate();
+        // CSRFトークンを再生成
+        $request->session()->regenerateToken();
+        return to_route('top')->with('success', 'ログアウトしました');
     }
 }
 

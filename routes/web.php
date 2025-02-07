@@ -14,3 +14,6 @@ Route::post('/users', [UserController::class, 'store'])->name('users.store');
 // ログイン
 Route::get('/login', [AuthController::class, 'LoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
+
+// ログアウト
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

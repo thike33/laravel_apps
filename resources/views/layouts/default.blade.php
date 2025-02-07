@@ -30,7 +30,10 @@
 
             @auth
                 <li>
-                    <a href="{{ route('login') }}">ログアウト</a>
+                    <form action="{{ route('logout') }}" method="post">
+                        @csrf
+                        <button type="submit" class="">ログアウト</button>
+                    </form>
                 </li>
             @endauth
         </ul>
