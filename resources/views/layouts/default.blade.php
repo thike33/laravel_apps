@@ -8,6 +8,7 @@
     @vite('resources/css/app.css')
 </head>
 <body class="flex flex-col min-h-screen">
+
 <header class="flex justify-between items-center p-5 border-b">
     <div class="">
         <a href="{{ route('top') }}" class="font-bold text-3xl">Laravelアプリ</a>
@@ -17,9 +18,21 @@
             <li>
                 <a href="">ブログ</a>
             </li>
-            <li>
-                <a href="{{ route('users.create') }}">新規登録</a>
-            </li>
+
+            @guest
+                <li>
+                    <a href="{{ route('users.create') }}">新規登録</a>
+                </li>
+                <li>
+                    <a href="{{ route('login') }}">ログイン</a>
+                </li>
+            @endguest
+
+            @auth
+                <li>
+                    <a href="{{ route('login') }}">ログアウト</a>
+                </li>
+            @endauth
         </ul>
     </nav>
 </header>
